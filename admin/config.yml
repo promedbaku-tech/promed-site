@@ -8,22 +8,9 @@ public_folder: "/images"
 collections:
   - name: "products"
     label: "Məhsullar"
-    files:
-      - name: "products"
-        label: "Məhsullar"
-        file: "data/products.json"
-        format: "json"
-        fields:
-          - label: "Məhsullar"
-            name: "body"
-            widget: "list"
-            fields:
-              - label: "Məhsul adı"
-                name: "name"
-                widget: "string"
-              - label: "Şəkil"
-                name: "image"
-                widget: "image"
-              - label: "Məlumat"
-                name: "description"
-                widget: "text"
+    file: "data/products.json"
+    format: "json"
+    fields:
+      - { label: "Ad", name: "name", widget: "string" }
+      - { label: "Açıqlama", name: "description", widget: "string" }
+      - { label: "Şəkil", name: "image", widget: "image" }
