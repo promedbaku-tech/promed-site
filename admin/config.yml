@@ -6,11 +6,24 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "products"
-    label: "Məhsullar"
-    file: "data/products.json"
-    format: "json"
-    fields:
-      - { label: "Ad", name: "name", widget: "string" }
-      - { label: "Açıqlama", name: "description", widget: "string" }
-      - { label: "Şəkil", name: "image", widget: "image" }
+  - name: "data"
+    label: "Məlumatlar"
+    files:
+      - name: "products"
+        label: "Məhsullar"
+        file: "data/products.json"
+        format: "json"
+        fields:
+          - label: "Məhsullar"
+            name: "products"
+            widget: "list"
+            fields:
+              - label: "Məhsul adı"
+                name: "name"
+                widget: "string"
+              - label: "Açıqlama"
+                name: "description"
+                widget: "text"
+              - label: "Şəkil"
+                name: "image"
+                widget: "image"
