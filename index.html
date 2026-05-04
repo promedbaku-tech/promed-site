@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promed</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb}
+header{height:60px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;background:#0ea5e9;color:white;position:sticky;top:0;z-index:1000}
+.logo{font-size:24px;font-weight:800;cursor:pointer}
+.hamburger{width:32px;height:24px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
+.hamburger span{height:4px;background:white;border-radius:10px}
+.side{position:fixed;top:0;right:-310px;width:290px;height:100vh;background:white;box-shadow:-8px 0 25px rgba(0,0,0,.25);padding:75px 20px 20px;transition:.3s;z-index:9999}
+.side.open{right:0}
+.close-btn{position:absolute;top:18px;right:22px;font-size:36px;color:#0ea5e9;cursor:pointer;font-weight:bold}
+.side button{width:100%;margin:8px 0;padding:13px;border:none;border-radius:10px;background:#f1f5f9;cursor:pointer;font-size:15px;font-weight:700}
+.lang-list{display:none}
+.lang-list button{background:#e0f2fe}
+.page{display:none}
+.page.active{display:block}
+.slider{position:relative;height:370px;overflow:hidden}
+.slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
+.overlay{position:absolute;width:100%;height:100%;background:rgba(0,0,0,.45)}
+.slider-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;text-align:center;width:90%}
+.slider-text h1{font-size:40px;margin:0}
+.slider-text p{font-size:18px}
+.section-title{text-align:center;font-size:30px;margin:45px 0 20px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;padding:25px}
+.card{background:white;border-radius:18px;padding:16px;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.1);transition:.3s}
+.card:hover{transform:translateY(-6px)}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:14px}
+.card p{line-height:1.5;color:#475569}
+.btn{margin:8px 4px 0;padding:11px 15px;border:none;border-radius:10px;cursor:pointer;font-weight:700}
+.order-btn{background:#0ea5e9;color:white}
+.cart-btn{background:#22c55e;color:white}
+.content-page{max-width:900px;margin:50px auto;background:white;padding:35px;border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.1)}
+.content-page h1{margin-top:0;color:#0ea5e9}
+.content-page p{white-space:pre-line;line-height:1.7}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;margin-top:10px;border:1px solid #ddd;border-radius:8px}
+.contact-form textarea{height:120px}
+.back-btn,.send-btn{background:#0ea5e9;color:white;border:none;padding:12px 18px;border-radius:10px;cursor:pointer;font-weight:700;margin-top:20px}
+.send-btn{background:#22c55e}
+.cart{position:fixed;right:20px;bottom:20px;background:white;padding:15px 18px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:1000;font-weight:700;cursor:pointer}
+.cart-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.45);z-index:10000}
+.cart-box{background:white;width:90%;max-width:420px;margin:90px auto;padding:25px;border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.cart-box h2{margin-top:0;color:#0ea5e9}
+.cart-item{padding:10px;background:#f1f5f9;border-radius:10px;margin:8px 0}
+.cart-actions button{width:100%;margin-top:10px;padding:12px;border:none;border-radius:10px;cursor:pointer;font-weight:700}
+.whatsapp{background:#22c55e;color:white}
+.clear{background:#ef4444;color:white}
+.close{background:#0ea5e9;color:white}
+footer{background:#0ea5e9;color:white;text-align:center;padding:18px;margin-top:40px}
+@media(max-width:600px){.slider{height:300px}.slider-text h1{font-size:30px}.side{width:270px}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo" onclick="showPage('home')">Promed</div>
+<div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</header>
+
+<div class="side" id="side">
+<div class="close-btn" onclick="closeMenu()">&times;</div>
+<button id="menuAbout" onclick="showPage('about')"></button>
+<button id="menuProducts" onclick="showPage('home')"></button>
+<button id="menuContact" onclick="showPage('contact')"></button>
+<button id="menuLang" onclick="toggleLang()"></button>
+<div class="lang-list" id="langList">
+<button onclick="setLang('az')">Az&#601;rbaycan</button>
+<button onclick="setLang('ru')">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
+<button onclick="setLang('en')">English</button>
+</div>
+</div>
+
+<div id="home" class="page active">
+<div class="slider">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1580281657527-47df0c5d0f6c?auto=format&fit=crop&w=1600&q=80')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=1600&q=80')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=1600&q=80')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=1600&q=80')"></div>
+<div class="overlay"></div>
+<div class="slider-text"><h1 id="title"></h1><p id="subtitle"></p></div>
+</div>
+
+<section id="products">
+<h2 class="section-title" id="productsTitle"></h2>
+<div class="products" id="productsList"></div>
+</section>
+</div>
+
+<div id="about" class="page">
+<div class="content-page">
+<h1 id="aboutTitle"></h1>
+<p id="aboutText"></p>
+<button class="back-btn" id="backBtn1" onclick="showPage('home')"></button>
+</div>
+</div>
+
+<div id="contact" class="page">
+<div class="content-page">
+<h1 id="contactTitle"></h1>
+<p id="contactText"></p>
+<hr>
+<h3 id="contactFormTitle"></h3>
+<div class="contact-form">
+<input id="nameInput" placeholder="">
+<input id="emailInput" placeholder="">
+<textarea id="messageInput" placeholder=""></textarea>
+<button class="send-btn" id="sendBtn" onclick="sendMessage()"></button>
+</div>
+<button class="back-btn" id="backBtn2" onclick="showPage('home')"></button>
+</div>
+</div>
+
+<div class="cart" onclick="openCart()"><span id="cartLabel"></span>: <span id="cartCount">0</span></div>
+
+<div class="cart-modal" id="cartModal">
+<div class="cart-box">
+<h2 id="cartTitle"></h2>
+<div id="cartItems"></div>
+<div class="cart-actions">
+<button class="whatsapp" id="orderAllBtn" onclick="orderAll()"></button>
+<button class="clear" id="clearCartBtn" onclick="clearCart()"></button>
+<button class="close" id="closeCartBtn" onclick="closeCart()"></button>
+</div>
+</div>
+</div>
+
+<footer>&copy; 2026 Promed</footer>
+
+<script>
+let currentLang="az";
+let productsData=[];
+
+function openMenu(){document.getElementById("side").classList.add("open")}
+function closeMenu(){document.getElementById("side").classList.remove("open")}
+function showPage(page){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(page).classList.add("active");closeMenu();window.scrollTo(0,0)}
+function toggleLang(){let x=document.getElementById("langList");x.style.display=x.style.display==="block"?"none":"block"}
+
+let slides=document.querySelectorAll(".slide");
+let slideIndex=0;
+function showSlide(){slides.forEach((s,i)=>{s.style.opacity=i===slideIndex?"1":"0"});slideIndex=(slideIndex+1)%slides.length}
+showSlide();setInterval(showSlide,3000);
+
+let cart=JSON.parse(localStorage.getItem("promedCart"))||[];
+function updateCartCount(){document.getElementById("cartCount").innerText=cart.length}
+function addToCart(item){cart.push(item);localStorage.setItem("promedCart",JSON.stringify(cart));updateCartCount()}
+function openCart(){document.getElementById("cartModal").style.display="block";renderCart()}
+function closeCart(){document.getElementById("cartModal").style.display="none"}
+function renderCart(){let box=document.getElementById("cartItems");box.innerHTML="";if(cart.length===0){box.innerHTML="<p>"+lang[currentLang].emptyCart+"</p>";return}cart.forEach((item,index)=>{box.innerHTML+="<div class='cart-item'>"+(index+1)+". "+item+"</div>"})}
+function clearCart(){cart=[];localStorage.setItem("promedCart",JSON.stringify(cart));updateCartCount();renderCart()}
+function order(name){let phone="994502123524";let msg="Salam, "+name+" sifaris etmek isteyirem";window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg),"_blank")}
+function orderAll(){if(cart.length===0){alert(lang[currentLang].emptyCart);return}let phone="994502123524";let msg="Salam, bu mehsullari sifaris etmek isteyirem: "+cart.join(", ");window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg),"_blank")}
+function sendMessage(){let name=document.getElementById("nameInput").value;let email=document.getElementById("emailInput").value;let message=document.getElementById("messageInput").value;let phone="994502123524";let msg="Salam, menim adim: "+name+"%0AEmail: "+email+"%0AMesaj: "+message;window.open("https://wa.me/"+phone+"?text="+msg,"_blank")}
+
+function getProductName(p){
+return p.name || p.title || "Məhsul";
+}
+
+function getProductDescription(p){
+return p.description || p.info || "";
+}
+
+function getProductImage(p){
+return p.image || p.photo || "https://via.placeholder.com/400x250";
+}
+
+function renderProducts(){
+let container=document.getElementById("productsList");
+container.innerHTML="";
+
+if(!productsData || productsData.length===0){
+container.innerHTML="<p style='text-align:center;width:100%;grid-column:1/-1;'>"+lang[currentLang].noProducts+"</p>";
+return;
+}
+
+productsData.forEach((p)=>{
+let name=getProductName(p);
+let description=getProductDescription(p);
+let image=getProductImage(p);
+
+container.innerHTML += `
+<div class="card">
+<img src="${image}" alt="${name}">
+<h3>${name}</h3>
+<p>${description}</p>
+<button class="btn cart-btn" onclick="addToCart('${name.replace(/'/g,"\\'")}')">${lang[currentLang].cart}</button>
+<button class="btn order-btn" onclick="order('${name.replace(/'/g,"\\'")}')">${lang[currentLang].order}</button>
+</div>
+`;
+});
+}
+
+function loadProducts(){
+fetch("data/products.json")
+.then(res=>{
+if(!res.ok){throw new Error("products.json tapilmadi")}
+return res.json();
+})
+.then(data=>{
+productsData=Array.isArray(data) ? data : [];
+renderProducts();
+})
+.catch(()=>{
+productsData=[
+{name:"Cərrahi əlcək",image:"https://images.unsplash.com/photo-1580281658223-9b93f18ae9ae?auto=format&fit=crop&w=800&q=80",description:"Keyfiyyətli cərrahi əlcək"},
+{name:"Şpris",image:"https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",description:"Steril tibbi şpris"},
+{name:"Stetoskop",image:"https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=800&q=80",description:"Peşəkar istifadə üçün stetoskop"}
+];
+renderProducts();
+});
+}
+
+let lang={
+az:{
+menuAbout:"Haqq\u0131m\u0131zda",menuProducts:"M\u0259hsullar",menuContact:"\u018flaq\u0259",menuLang:"Dil \u25be",
+title:"Tibbi Avadanl\u0131qlar",subtitle:"Keyfiyy\u0259t v\u0259 etibar",productsTitle:"M\u0259hsullar",
+aboutTitle:"Promed MMC haqq\u0131nda m\u0259lumat",
+aboutText:"\u015eirk\u0259timiz Promed MMC 2003-c\u00fc ild\u0259 (\u0259vv\u0259lki ad\u0131 Kron Ltd) kimi t\u0259sis edilmi\u015fdir. \u015eirk\u0259tin \u0259sas f\u0259aliyy\u0259t istiqam\u0259ti tibbi avadanl\u0131qlar, c\u0259rrahi al\u0259tl\u0259r v\u0259 istehlak materiallar\u0131n\u0131n sat\u0131\u015f\u0131d\u0131r.\n\nPromed MMC-d\u0259 haz\u0131rda 8 n\u0259f\u0259r \u00e7al\u0131\u015f\u0131r: onlar\u0131n 3-\u00fc tibbi avadanl\u0131qlar\u0131n texniki xidm\u0259ti \u00fczr\u0259 m\u00fch\u0259ndis, 2-si marketinq \u015f\u00f6b\u0259sind\u0259, 1-i sat\u0131\u015f \u00fczr\u0259 m\u00fct\u0259x\u0259ssis, 1-i m\u00fchasib, dig\u0259ri is\u0259 m\u0259n \u2013 \u015firk\u0259tin sahibi v\u0259 direktoru B\u0259hram B\u0259liyev.\n\n\u0130llik d\u00f6vriyy\u0259miz t\u0259xmin\u0259n 1,5 milyon AB\u015e dollar\u0131 t\u0259\u015fkil edir.\n\nBiz tibbi avadanl\u0131qlar sah\u0259sind\u0259 \u00c7ind\u0259n Comen, Pioway, Biobase, Heal Force, h\u0259m\u00e7inin Rusiya, Avropa \u00f6lk\u0259l\u0259ri, Koreyadan Stratek Co. Ltd v\u0259 Poskom Co. Ltd \u015firk\u0259tl\u0259ri il\u0259 \u0259m\u0259kda\u015fl\u0131q edirik.\n\nBizim Bak\u0131 \u015f\u0259h\u0259rind\u0259 yerl\u0259\u015f\u0259n emalatxanam\u0131z, anbar\u0131m\u0131z v\u0259 sat\u0131\u015f salonumuz m\u00f6vcuddur. \u00dcmumi sah\u0259 350 m\u00b2 t\u0259\u015fkil edir.\n\nYeni \u0259m\u0259kda\u015fl\u0131q qurma\u011fa a\u00e7\u0131\u011f\u0131q.\n\nH\u00f6rm\u0259tl\u0259,\nB\u0259hram B\u0259liyev\nPromed MMC-nin sahibi v\u0259 direktoru",
+contactTitle:"\u018flaq\u0259",contactText:"\u018flaq\u0259 n\u00f6mr\u0259si: +994 50 212 35 24",contactFormTitle:"Mesaj g\u00f6nd\u0259r",
+order:"Sifari\u015f et",cart:"S\u0259b\u0259t\u0259 \u0259lav\u0259 et",back:"Geri qay\u0131t",cartLabel:"S\u0259b\u0259t",
+cartTitle:"S\u0259b\u0259t",orderAll:"Ham\u0131s\u0131n\u0131 sifari\u015f et",clearCart:"S\u0259b\u0259ti t\u0259mizl\u0259",closeCart:"Ba\u011fla",emptyCart:"S\u0259b\u0259t bo\u015fdur",send:"G\u00f6nd\u0259r",name:"Ad",email:"Email",message:"Mesaj",noProducts:"Məhsul yoxdur"
+},
+ru:{
+menuAbout:"\u041e \u043d\u0430\u0441",menuProducts:"\u0422\u043e\u0432\u0430\u0440\u044b",menuContact:"\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u044b",menuLang:"\u042f\u0437\u044b\u043a \u25be",
+title:"\u041c\u0435\u0434\u0438\u0446\u0438\u043d\u0441\u043a\u043e\u0435 \u043e\u0431\u043e\u0440\u0443\u0434\u043e\u0432\u0430\u043d\u0438\u0435",subtitle:"\u041a\u0430\u0447\u0435\u0441\u0442\u0432\u043e \u0438 \u0434\u043e\u0432\u0435\u0440\u0438\u0435",productsTitle:"\u0422\u043e\u0432\u0430\u0440\u044b",
+aboutTitle:"\u041e \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 Promed MMC",aboutText:"Promed MMC \u0431\u044b\u043b\u0430 \u043e\u0441\u043d\u043e\u0432\u0430\u043d\u0430 \u0432 2003 \u0433\u043e\u0434\u0443. \u041a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0437\u0430\u043d\u0438\u043c\u0430\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0434\u0430\u0436\u0435\u0439 \u043c\u0435\u0434\u0438\u0446\u0438\u043d\u0441\u043a\u043e\u0433\u043e \u043e\u0431\u043e\u0440\u0443\u0434\u043e\u0432\u0430\u043d\u0438\u044f, \u0445\u0438\u0440\u0443\u0440\u0433\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432 \u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u043d\u044b\u0445 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u043e\u0432.",
+contactTitle:"\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u044b",contactText:"\u041d\u043e\u043c\u0435\u0440: +994 50 212 35 24",contactFormTitle:"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435",
+order:"\u0417\u0430\u043a\u0430\u0437\u0430\u0442\u044c",cart:"\u0412 \u043a\u043e\u0440\u0437\u0438\u043d\u0443",back:"\u041d\u0430\u0437\u0430\u0434",cartLabel:"\u041a\u043e\u0440\u0437\u0438\u043d\u0430",
+cartTitle:"\u041a\u043e\u0440\u0437\u0438\u043d\u0430",orderAll:"\u0417\u0430\u043a\u0430\u0437\u0430\u0442\u044c \u0432\u0441\u0435",clearCart:"\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c",closeCart:"\u0417\u0430\u043a\u0440\u044b\u0442\u044c",emptyCart:"\u041a\u043e\u0440\u0437\u0438\u043d\u0430 \u043f\u0443\u0441\u0442\u0430",send:"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c",name:"\u0418\u043c\u044f",email:"Email",message:"\u0421\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435",noProducts:"\u0422\u043e\u0432\u0430\u0440\u043e\u0432 \u043d\u0435\u0442"
+},
+en:{
+menuAbout:"About Us",menuProducts:"Products",menuContact:"Contact",menuLang:"Language \u25be",title:"Medical Equipment",subtitle:"Quality and trust",productsTitle:"Products",
+aboutTitle:"About Promed MMC",aboutText:"Promed MMC was founded in 2003. The company specializes in the sale of medical equipment, surgical instruments, and consumable materials.",
+contactTitle:"Contact",contactText:"Contact number: +994 50 212 35 24",contactFormTitle:"Send message",
+order:"Order",cart:"Add to cart",back:"Back",cartLabel:"Cart",
+cartTitle:"Cart",orderAll:"Order all",clearCart:"Clear cart",closeCart:"Close",emptyCart:"Cart is empty",send:"Send",name:"Name",email:"Email",message:"Message",noProducts:"No products"
+}
+};
+
+function setLang(l){
+currentLang=l;
+document.getElementById("menuAbout").innerText=lang[l].menuAbout;
+document.getElementById("menuProducts").innerText=lang[l].menuProducts;
+document.getElementById("menuContact").innerText=lang[l].menuContact;
+document.getElementById("menuLang").innerText=lang[l].menuLang;
+document.getElementById("title").innerText=lang[l].title;
+document.getElementById("subtitle").innerText=lang[l].subtitle;
+document.getElementById("productsTitle").innerText=lang[l].productsTitle;
+document.getElementById("aboutTitle").innerText=lang[l].aboutTitle;
+document.getElementById("aboutText").innerText=lang[l].aboutText;
+document.getElementById("contactTitle").innerText=lang[l].contactTitle;
+document.getElementById("contactText").innerText=lang[l].contactText;
+document.getElementById("contactFormTitle").innerText=lang[l].contactFormTitle;
+document.getElementById("backBtn1").innerText=lang[l].back;
+document.getElementById("backBtn2").innerText=lang[l].back;
+document.getElementById("cartTitle").innerText=lang[l].cartTitle;
+document.getElementById("cartLabel").innerText=lang[l].cartLabel;
+document.getElementById("orderAllBtn").innerText=lang[l].orderAll;
+document.getElementById("clearCartBtn").innerText=lang[l].clearCart;
+document.getElementById("closeCartBtn").innerText=lang[l].closeCart;
+document.getElementById("sendBtn").innerText=lang[l].send;
+document.getElementById("nameInput").placeholder=lang[l].name;
+document.getElementById("emailInput").placeholder=lang[l].email;
+document.getElementById("messageInput").placeholder=lang[l].message;
+renderProducts();
+renderCart();
+closeMenu();
+}
+
+updateCartCount();
+setLang("az");
+loadProducts();
+</script>
+
+</body>
+</html>
