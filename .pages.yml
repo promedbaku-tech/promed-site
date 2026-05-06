@@ -1,0 +1,26 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - name: products
+    label: Məhsullar
+    type: file
+    path: data/products.json
+    fields:
+      - name: products
+        label: Məhsullar
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Məhsul adı
+            type: string
+
+          - name: description
+            label: Məlumat
+            type: text
+
+          - name: image
+            label: Şəkil
+            type: image
