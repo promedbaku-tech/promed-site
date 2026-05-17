@@ -1,29 +1,6 @@
 {
   "products": [
     {
-      "name": "Cərrahi əlcək",
-      "description": "Keyfiyyətli cərrahi əlcək"
-    },
-    {
-      "name": "Şpris",
-      "description": "Steril tibbi şpris",
-      "image": "/images/4.jpg"
-    },
-    {
-      "name": "Stetoskop",
-      "description": "Peşəkar istifadə üçün stetoskop"
-    },
-    {
-      "name": "adasdasd",
-      "description": "awdqdasdas",
-      "image": "/images/4-1.jpg"
-    },
-    {
-      "name": "sdadad",
-      "description": "asdada",
-      "image": "/images/5.jpg"
-    },
-    {
       "name": "Oftalmoscop",
       "image": "/images/Снимок экрана 2026-05-17 103124.jpg"
     },
@@ -952,6 +929,15 @@
     },
     {
       "image": "/images/Снимок экрана 2026-05-17 135832.jpg"
+    },
+    {
+      "image": "/images/Снимок экрана 2026-05-17 140035.jpg"
+    },
+    {
+      "image": "/images/Снимок экрана 2026-05-17 140124.jpg"
+    },
+    {
+      "image": "/images/Снимок экрана 2026-05-17 140241.jpg"
     }
   ]
 }
