@@ -3054,6 +3054,10 @@
       "name": "PXP-20HF PLUS",
       "description": "specification\nMax. Output\t1.6 kW\nkV Range\t40 - 100 kV\nmA Range\t15 - 20 mA\nPower Supply\t100 - 120 V / 200 - 240 V\nOutput Time\tN/A\nTube Focal Spot\t1.2 mm",
       "image": "/images/Снимок экрана 2026-05-29 171211.jpg"
+    },
+    {
+      "name": "PXMS-1800 / 1800PLUS",
+      "image": "/images/Снимок экрана 2026-05-29 171652.jpg"
     }
   ]
 }
